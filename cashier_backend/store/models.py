@@ -1,17 +1,17 @@
 from django.db import models
-from datetime import datetime
 
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
+    product_image = models.ImageField(upload_to="product/", blank=True, null=True)
     price = models.IntegerField()
 
     def __str__(self):
         return f"{self.name} : {self.price} bath"
 
 class Bill(models.Model):
-    date = models.DateTimeField(default=datetime.now())
+    date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"bill date {self.date}"
