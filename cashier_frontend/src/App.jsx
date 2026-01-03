@@ -1,8 +1,29 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import ProductList from './components/ProductList'
+import Wishlist from './components/Wishlist'
 import './App.css'
 
 function App() {
+
+  const [wishlistProduct, setWishlistProduct] = useState([])
+
+  useEffect(()=>{
+    console.log(`added wishlist!`)
+    console.log(wishlistProduct)
+  }, [wishlistProduct])
+
+  const addWishlist = (product) => {
+    if ((wishlistProduct.filter((item) => (item.name === product.name))).length === 0){
+      product.quantity = 1
+      setWishlistProduct([...wishlistProduct, product]) 
+    }
+    else {
+      product.quantity++
+      console.log(wishlistProduct.filter((item) => (item.name !== product.name)))
+      setWishlistProduct([...(wishlistProduct.filter((item) => (item.name !== product.name))), product])
+    }
+  }
+
   return (
     <>
       <nav className='header'>
@@ -12,10 +33,10 @@ function App() {
 
       <div className='montserrat-thin' style={{'display':'flex', 'flexDirection':'row', 'justifyContent':'start', 'paddingTop':'80px'}}>
         <div className='container productList'>
-            <ProductList />
+            <ProductList addWishlist={addWishlist} wishlistProduct={wishlistProduct}/>
         </div>
         <div className='container cashierMenu'>
-          <h1>Another one</h1>
+            <Wishlist wishlistProduct={wishlistProduct}/>
         </div>
       </div>
     </>

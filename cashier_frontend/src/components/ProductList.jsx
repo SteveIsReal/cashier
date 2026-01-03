@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import './card.css'
 
-export default function ProductList(){
+export default function ProductList({addWishlist, wishlistProduct}){
 
     const [product, setProduct] = useState(null)
 
@@ -20,7 +20,7 @@ export default function ProductList(){
                         <h2 className="title">{item.name}</h2>
                         <p className="title">{item.description}</p>
                     </div>
-                    <button className="button">Add Product</button>
+                    <button className="button" onClick={()=>{addWishlist(item)}}>Add Product</button>
                 </div>
             ))}
         </>

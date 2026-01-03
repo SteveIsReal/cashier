@@ -30,6 +30,7 @@
 .cashierMenu {
     background-color: rgb(233, 233, 233);
     width: 30%;
+    flex-direction: column;
     position: fixed;
     right:0;
 
